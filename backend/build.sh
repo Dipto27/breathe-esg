@@ -1,17 +1,20 @@
-#!/bin/bash
-# Build script for Railway/Render deployment
+#!/usr/bin/env bash
 set -e
 
-echo "=== Installing Python dependencies ==="
+echo "=== [1/4] Installing Node & building React frontend ==="
+cd ../frontend
+npm install
+npm run build
+cd ../backend
+
+echo "=== [2/4] Installing Python dependencies ==="
 pip install -r requirements.txt
 
-echo "=== Running migrations ==="
+echo "=== [3/4] Django: migrate + collectstatic ==="
 python manage.py migrate --no-input
-
-echo "=== Collecting static files ==="
 python manage.py collectstatic --no-input
 
-echo "=== Setting up demo user ==="
+echo "=== [4/4] Creating demo users ==="
 python manage.py setup_demo || true
 
 echo "=== Build complete ==="
