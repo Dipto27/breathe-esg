@@ -12,7 +12,7 @@ DEBUG = config('DEBUG', default=True, cast=bool)
 ALLOWED_HOSTS = config(
     'ALLOWED_HOSTS',
     default='localhost,127.0.0.1,breathe-esg-09z5.onrender.com'
-).split(',')..09
+).split(',')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
